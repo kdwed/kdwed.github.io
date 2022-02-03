@@ -1,10 +1,14 @@
-const token = document.location.href.split('#')[1];
+var token = document.location.href.split('#')[1];
 
-if (token) {
-  $.get(`https://wed-e8b40.firebaseio.com/guests/${token}.json`, function(res) {
-    if (res.name) {
-      $('.namespace').html(res.name);
-      $('#main').fadeIn();
-    }
-  });
+if (!token) {
+  token = 'home'
 }
+
+$.get(`https://kdwed-f1dd2-default-rtdb.europe-west1.firebasedatabase.app/guests/${token}.json`, function(res) {
+  if (res) {
+    $('.namespace').html(res);
+  } else {
+    $('.namespace').html(token);
+  }
+  $('#main').fadeIn();
+});
